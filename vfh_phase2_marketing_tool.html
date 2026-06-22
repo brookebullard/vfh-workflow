@@ -51,19 +51,12 @@
     }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: var(--font-sans);
-    background: var(--color-background-secondary);
-    color: var(--color-text-primary);
-    min-height: 100vh;
-    padding: 24px 16px;
-  }
+  body { font-family: var(--font-sans); background: var(--color-background-secondary); color: var(--color-text-primary); min-height: 100vh; padding: 24px 16px; }
   .page-wrap { max-width: 900px; margin: 0 auto; }
   .page-header { margin-bottom: 20px; }
   .page-header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
   .page-header p { font-size: 13px; color: var(--color-text-tertiary); margin-top: 4px; }
   .top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .top-bar-actions { display: flex; gap: 8px; }
   .btn { font-size: 12px; padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: background .15s; font-family: var(--font-sans); }
   .btn:hover { background: var(--color-background-secondary); }
   .btn-primary { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); }
@@ -78,9 +71,11 @@
   .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 12px; font-size: 11px; color: var(--color-text-secondary); }
   .leg { display: flex; align-items: center; gap: 5px; }
   .leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .enrollment-note { display: flex; align-items: flex-start; gap: 10px; background: var(--color-background-success); border: 0.5px solid #97C459; border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: #27500A; line-height: 1.5; }
+  .enrollment-note i { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
   .phase-wrap { background: var(--color-background-primary); border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); padding: 14px; margin-bottom: 12px; }
   .phase-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .phase-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .04em; }
+  .phase-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
   .phase-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-tertiary); }
   .timeline { display: grid; gap: 10px; }
   .tl-col-label { font-size: 11px; color: var(--color-text-tertiary); border-top: 1.5px solid var(--color-border-tertiary); padding-top: 4px; margin-bottom: 6px; }
@@ -95,8 +90,6 @@
   .pill-call { background: #EEEDFE; color: #3C3489; }
   .pill-mail { background: #FAEEDA; color: #633806; }
   .pill-decision { background: #FAEEDA; color: #633806; }
-  .pill-stop { background: #FCEBEB; color: #791F1F; }
-  .pill-enrolled { background: #EAF3DE; color: #27500A; }
   .dropoff-row { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
   .dropoff-bar-bg { flex: 1; height: 4px; background: var(--color-border-tertiary); border-radius: 2px; }
   .dropoff-bar { height: 4px; border-radius: 2px; background: #97C459; transition: width .3s; }
@@ -124,7 +117,7 @@
 <div class="page-wrap">
 
   <div class="page-header">
-    <h1>VFH Phase 2 — Marketing planning tool</h1>
+    <h1>VFH — Marketing planning tool</h1>
     <p>Click any step to add a recommendation or adjust engagement rate. Flag steps where marketing can intervene to boost engagement and lower inbound calls (IBC).</p>
   </div>
 
@@ -135,25 +128,29 @@
       <div class="stat"><div class="stat-label">Avg engagement rate</div><div class="stat-val bad" id="stat-dropoff">—</div></div>
       <div class="stat"><div class="stat-label">Recommendations added</div><div class="stat-val good" id="stat-recs">0</div></div>
     </div>
-    <div class="top-bar-actions" style="align-self:flex-start">
+    <div style="align-self:flex-start">
       <button class="btn" onclick="exportSummary()"><i class="ti ti-download" aria-hidden="true"></i> Export</button>
     </div>
+  </div>
+
+  <div class="enrollment-note">
+    <i class="ti ti-info-circle" aria-hidden="true"></i>
+    <div><strong>Enrollment exits the cadence at multiple points.</strong> At each checkpoint in the pre-enrollment sequence, if the member enrolls they immediately exit outreach — not just at the final claim decision. In the approved member sequence, reaching the member on any call also triggers enrollment and stops further outreach.</div>
   </div>
 
   <div class="legend">
     <div class="leg"><div class="leg-dot" style="background:#E1F5EE;border:0.5px solid #5DCAA5"></div>Email</div>
     <div class="leg"><div class="leg-dot" style="background:#EEEDFE;border:0.5px solid #AFA9EC"></div>Phone call</div>
     <div class="leg"><div class="leg-dot" style="background:#FAEEDA;border:0.5px solid #EF9F27"></div>Print mail / Decision</div>
-    <div class="leg"><div class="leg-dot" style="background:#EAF3DE;border:0.5px solid #97C459"></div>Enrolled</div>
     <div class="leg"><div class="leg-dot" style="background:#FAEEDA;border:0.5px solid #EF9F27;outline:2px solid #EF9F27;outline-offset:1px"></div>Flagged opportunity</div>
     <div class="leg"><div style="width:10px;height:10px;border-left:3px solid #E24B4A;border-radius:0 2px 2px 0;flex-shrink:0"></div>IBC risk</div>
-    <div class="leg"><div style="width:8px;height:8px;border-radius:50%;background:var(--color-text-info);flex-shrink:0"></div>Has recommendation</div>
+    <div class="leg"><div style="width:8px;height:8px;border-radius:50%;background:#185fa5;flex-shrink:0"></div>Has recommendation</div>
   </div>
 
-  <!-- Phase 1 -->
+  <!-- Pre-enrollment outreach -->
   <div class="phase-wrap">
     <div class="phase-head">
-      <div class="phase-title">Phase 1 — Pre-enrollment outreach</div>
+      <div class="phase-title">Pre-enrollment outreach</div>
       <div class="phase-badge">34 days</div>
     </div>
     <div class="timeline" style="grid-template-columns:repeat(4,1fr)">
@@ -170,7 +167,7 @@
           <div id="s1" class="step-card" onclick="openPanel(1)">
             <span class="step-type-pill pill-decision">Decision</span>
             <div class="step-name">Enrolled?</div>
-            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Yes → exit · No → Day 7</div>
+            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Yes → exit cadence · No → Day 7</div>
           </div>
         </div>
       </div>
@@ -185,10 +182,17 @@
         <div style="margin-top:8px">
           <div id="s3" class="step-card ibc-risk" onclick="openPanel(3)">
             <span class="step-type-pill pill-email">Email</span>
-            <div class="step-name">Wk 3 Email 2</div>
+            <div class="step-name">Wk 2 Email 2</div>
             <div class="ibc-badge"><i class="ti ti-phone-incoming" style="font-size:10px" aria-hidden="true"></i> IBC risk</div>
             <div class="dropoff-row"><div class="dropoff-bar-bg"><div class="dropoff-bar" id="bar3" style="width:45%"></div></div><span class="dropoff-pct" id="pct3">45%</span></div>
             <button class="flag-btn" id="flag3" onclick="toggleFlag(event,3)">+ Flag opportunity</button>
+          </div>
+        </div>
+        <div style="margin-top:8px">
+          <div id="s1b" class="step-card" onclick="openPanel(12)">
+            <span class="step-type-pill pill-decision">Decision</span>
+            <div class="step-name">Enrolled?</div>
+            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Yes → exit cadence · No → Day 14</div>
           </div>
         </div>
       </div>
@@ -196,17 +200,24 @@
         <div class="tl-col-label">Day 14</div>
         <div id="s4" class="step-card ibc-risk" onclick="openPanel(4)">
           <span class="step-type-pill pill-email">Email</span>
-          <div class="step-name">Wk 5 Email 3</div>
+          <div class="step-name">Wk 3 Email 3</div>
           <div class="ibc-badge"><i class="ti ti-phone-incoming" style="font-size:10px" aria-hidden="true"></i> IBC risk</div>
           <div class="dropoff-row"><div class="dropoff-bar-bg"><div class="dropoff-bar" id="bar4" style="width:35%"></div></div><span class="dropoff-pct" id="pct4">35%</span></div>
           <button class="flag-btn" id="flag4" onclick="toggleFlag(event,4)">+ Flag opportunity</button>
+        </div>
+        <div style="margin-top:8px">
+          <div id="s1c" class="step-card" onclick="openPanel(13)">
+            <span class="step-type-pill pill-decision">Decision</span>
+            <div class="step-name">Enrolled?</div>
+            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Yes → exit cadence · No → Day 21</div>
+          </div>
         </div>
       </div>
       <div>
         <div class="tl-col-label">Day 21</div>
         <div id="s5" class="step-card" onclick="openPanel(5)">
           <span class="step-type-pill pill-email">Email</span>
-          <div class="step-name">Wk 6 Email 4</div>
+          <div class="step-name">Wk 4 Email 4</div>
           <div class="dropoff-row"><div class="dropoff-bar-bg"><div class="dropoff-bar" id="bar5" style="width:25%"></div></div><span class="dropoff-pct" id="pct5">25%</span></div>
           <button class="flag-btn" id="flag5" onclick="toggleFlag(event,5)">+ Flag opportunity</button>
         </div>
@@ -214,17 +225,17 @@
           <div id="s6" class="step-card" onclick="openPanel(6)">
             <span class="step-type-pill pill-decision">Decision</span>
             <div class="step-name">Claim decision</div>
-            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Approved → Phase 2 · Denied → Stop</div>
+            <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Approved → approved member outreach · Denied → stop</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Phase 2 -->
+  <!-- Approved member outreach -->
   <div class="phase-wrap">
     <div class="phase-head">
-      <div class="phase-title">Phase 2 — Approved member outreach</div>
+      <div class="phase-title">Approved member outreach</div>
       <div class="phase-badge">14 days</div>
     </div>
     <div class="timeline" style="grid-template-columns:repeat(3,1fr)">
@@ -308,18 +319,20 @@
 
 <script>
 const steps = [
-  {id:0,name:'Wk 1 Email 1',phase:'Phase 1',day:'Day 1',type:'Email'},
-  {id:1,name:'Enrolled? (Day 1)',phase:'Phase 1',day:'Day 1',type:'Decision'},
-  {id:2,name:'Wk 1 Print Collateral',phase:'Phase 1',day:'Day 7',type:'Print mail'},
-  {id:3,name:'Wk 3 Email 2',phase:'Phase 1',day:'Day 7',type:'Email'},
-  {id:4,name:'Wk 5 Email 3',phase:'Phase 1',day:'Day 14',type:'Email'},
-  {id:5,name:'Wk 6 Email 4',phase:'Phase 1',day:'Day 21',type:'Email'},
-  {id:6,name:'Claim decision',phase:'Phase 1',day:'Day 21',type:'Decision'},
-  {id:7,name:'Approved Wk 1 Call 1',phase:'Phase 2',day:'Day 1',type:'Outbound call'},
-  {id:8,name:'Approved Wk 1 Email 5',phase:'Phase 2',day:'Day 7',type:'Email'},
-  {id:9,name:'Approved Wk 1 Collateral 2',phase:'Phase 2',day:'Day 7',type:'Print mail'},
-  {id:10,name:'Approved Wk 2 Call 2',phase:'Phase 2',day:'Day 7',type:'Outbound call'},
-  {id:11,name:'Approved Wk 3 Call 3',phase:'Phase 2',day:'Day 14',type:'Outbound call'},
+  {id:0,name:'Wk 1 Email 1',phase:'Pre-enrollment outreach',day:'Day 1',type:'Email'},
+  {id:1,name:'Enrolled? (Day 1)',phase:'Pre-enrollment outreach',day:'Day 1',type:'Decision'},
+  {id:2,name:'Wk 1 Print Collateral',phase:'Pre-enrollment outreach',day:'Day 7',type:'Print mail'},
+  {id:3,name:'Wk 2 Email 2',phase:'Pre-enrollment outreach',day:'Day 7',type:'Email'},
+  {id:4,name:'Wk 3 Email 3',phase:'Pre-enrollment outreach',day:'Day 14',type:'Email'},
+  {id:5,name:'Wk 4 Email 4',phase:'Pre-enrollment outreach',day:'Day 21',type:'Email'},
+  {id:6,name:'Claim decision',phase:'Pre-enrollment outreach',day:'Day 21',type:'Decision'},
+  {id:7,name:'Approved Wk 1 Call 1',phase:'Approved member outreach',day:'Day 1',type:'Outbound call'},
+  {id:8,name:'Approved Wk 1 Email 5',phase:'Approved member outreach',day:'Day 7',type:'Email'},
+  {id:9,name:'Approved Wk 1 Collateral 2',phase:'Approved member outreach',day:'Day 7',type:'Print mail'},
+  {id:10,name:'Approved Wk 2 Call 2',phase:'Approved member outreach',day:'Day 7',type:'Outbound call'},
+  {id:11,name:'Approved Wk 3 Call 3',phase:'Approved member outreach',day:'Day 14',type:'Outbound call'},
+  {id:12,name:'Enrolled? (Day 7)',phase:'Pre-enrollment outreach',day:'Day 7',type:'Decision'},
+  {id:13,name:'Enrolled? (Day 14)',phase:'Pre-enrollment outreach',day:'Day 14',type:'Decision'},
 ];
 
 const state = {};
@@ -366,8 +379,10 @@ function saveRec() {
   const txt = document.getElementById('panel-rec').value.trim();
   state[activeId].rec = txt;
   const card = document.getElementById('s'+activeId);
-  if (txt) card.classList.add('has-note');
-  else card.classList.remove('has-note');
+  if (card) {
+    if (txt) card.classList.add('has-note');
+    else card.classList.remove('has-note');
+  }
   closePanel();
   updateStats();
 }
@@ -394,9 +409,9 @@ function updateStats() {
 }
 
 function exportSummary() {
-  const lines = ['VFH Phase 2 — Marketing Recommendations Summary', '='.repeat(52), ''];
+  const lines = ['VFH — Marketing Recommendations Summary', '='.repeat(52), ''];
   let hasAny = false;
-  ['Phase 1','Phase 2'].forEach(phase => {
+  ['Pre-enrollment outreach','Approved member outreach'].forEach(phase => {
     const phaseSteps = steps.filter(s=>s.phase===phase);
     const phaseLines = [];
     phaseSteps.forEach(s => {
